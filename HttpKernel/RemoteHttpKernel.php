@@ -99,6 +99,7 @@ class RemoteHttpKernel implements HttpKernelInterface
      */
     private function handleRaw(Request $request) {
         $curl = $this->lastCurlRequest = $this->getCurlRequest();
+        $this->prepareHeaders($request);
         $curl->setOptionArray(
             array(
                 CURLOPT_URL=>$request->getUri(),
@@ -182,5 +183,19 @@ class RemoteHttpKernel implements HttpKernelInterface
 
     public function getLastCurlRequest() {
         return $this->lastCurlRequest;
+    }
+
+    /**
+     * Performing some headers alternations before to send the request.
+     *
+     * Alternation's list:
+     *  - When sending a POST request, cURL handle by itself the content-type
+     *
+     * @param Request $request
+     */
+    private function prepareHeaders(Request $request) {
+        if ("POST" === $request->getMethod()) {
+            $request->headers->remove('content-type');
+        }
     }
 }
