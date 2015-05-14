@@ -1,5 +1,5 @@
 {
-    "name": "zeroem/curl-bundle",
+    "name": "Viscaweb/ZeroemCurlBundle",
     "type": "symfony-bundle",
     "description": "Allows you to easily create and execute HTTP Requests with cURL",
     "keywords": ["curl","httpkernel","http","symfony","bundle"],
